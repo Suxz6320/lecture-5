@@ -42,6 +42,31 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _step = 1; // 步长：每次点击 FAB 增加的值
 
+  // —— State 生命周期日志：每个钩子各打印一行 ——
+  @override
+  void initState() {
+    super.initState();
+    print('[lifecycle] initState: 一次性初始化');
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    print('[lifecycle] didChangeDependencies: 依赖（如主题）就绪/变化');
+  }
+
+  @override
+  void didUpdateWidget(covariant MyHomePage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print('[lifecycle] didUpdateWidget: 父级重建传入新配置');
+  }
+
+  @override
+  void dispose() {
+    print('[lifecycle] dispose: 销毁清理');
+    super.dispose();
+  }
+
   void _incrementCounter() {
     setState(() {
       _counter += _step;
@@ -54,11 +79,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print('[lifecycle] build: 重建界面 (counter=$_counter, step=$_step)');
     return Scaffold(
       appBar: AppBar(
         // 主题取用①：从主题取 inversePrimary 作为 AppBar 背景色
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
+        // 资源替换：pubspec 声明 assets/images/ 后，用 Image.asset 作 AppBar 背景
+        flexibleSpace: Image.asset(
+          'assets/images/banner.png',
+          fit: BoxFit.cover,
+        ),
         actions: [
           // 步长调节：弹层选择 1 / 2 / 5
           PopupMenuButton<int>(
