@@ -1,0 +1,61 @@
+---
+title: counter_deep · Widget 树（课堂案例复现 步骤一～三）
+config:
+  look: handDrawn
+  handDrawnSeed: 42
+  theme: default
+  flowchart:
+    htmlLabels: true
+    curve: basis
+    wrappingWidth: 320
+    nodeSpacing: 36
+    rankSpacing: 52
+---
+flowchart TD
+    ENTRY["main()：runApp(const MyApp())<br/>挂载根 Widget，框架随后接管渲染<br/>〔入口函数，不是 Widget〕"]:::entry
+
+    ENTRY --> APP["MyApp<br/>〔自写〕StatelessWidget"]:::ownSt
+
+    APP --> MAT["MaterialApp<br/>〔内置〕StatefulWidget<br/>title: 'Flutter Demo'"]:::fwSt
+    MAT -. "theme ★改造二" .-> THEME["主题：ThemeData(<br/>colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),<br/>useMaterial3: true)<br/>模板默认是 Colors.deepPurple"]:::cfg
+    MAT --> HOME["home：MyHomePage(title: 'Flutter Demo Home Page')<br/>〔自写〕StatefulWidget"]:::ownSf
+
+    HOME --> ST["_MyHomePageState（State 的子类，非 Widget 本身）<br/>int _counter = 0<br/>★改造一：int _step = 1<br/>★改造三：每个钩子 print 一行"]:::state
+    ST -. "★改造三：生命周期日志" .-> LC["initState → didChangeDependencies → build<br/>→ didUpdateWidget → dispose"]:::cfg
+
+    ST -->|"build(context) 返回"| SCA["Scaffold<br/>〔内置〕StatefulWidget<br/>页面骨架：appBar / body / floatingActionButton"]:::fwSf
+    SCA -. "本案未使用" .-> UNUSED["bottomNavigationBar / drawer<br/>Scaffold 的其它插槽"]:::cfg
+
+    SCA --> BAR["appBar：AppBar<br/>〔内置〕StatefulWidget<br/>backgroundColor: Theme.of(context).colorScheme.inversePrimary ← 取主题 ①"]:::fwSf
+    BAR --> BT["title：Text(widget.title)<br/>〔内置〕StatelessWidget"]:::fwSt
+    BAR -. "actions ★改造一" .-> STEP["PopupMenuButton（步长 1 / 2 / 5）<br/>〔内置〕StatefulWidget"]:::fwSf
+    BAR -. "flexibleSpace ★改造三" .-> IMG["Image.asset('assets/images/banner.png')<br/>〔内置〕StatelessWidget<br/>资源需在 pubspec.yaml 的 assets 段声明"]:::fwSt
+
+    SCA --> CENTER["body：Center<br/>布局 / 渲染类（无内部可变状态）"]:::ro
+    CENTER --> COL["Column<br/>布局 / 渲染类"]:::ro
+    COL --> T1["Text('You have pushed the button this many times:')<br/>〔内置〕StatelessWidget"]:::fwSt
+    COL --> T2["Text('$_counter', style: Theme.of(context).textTheme.headlineMedium)<br/>〔内置〕StatelessWidget<br/>★改造二：取主题 ②"]:::fwSt
+    COL -. "★改造一 新增" .-> T3["Text('步长：$_step')<br/>〔内置〕StatelessWidget"]:::fwSt
+
+    SCA --> FAB["floatingActionButton：FloatingActionButton<br/>〔内置〕StatelessWidget<br/>onPressed: _incrementCounter"]:::fwSt
+    FAB --> ICON["child：Icon(Icons.add)<br/>〔内置〕StatelessWidget"]:::fwSt
+    FAB -. "点击后" .-> ACT["_counter += _step<br/>→ setState()：标记 dirty → 下一帧重建<br/>（改样式按 r，改 initState 逻辑按 R）"]:::cfg
+
+    subgraph LG["图例：颜色 = 两类 Widget ＋ 自写 / 内置；虚线 = ★改造点或非 Widget 的配置说明"]
+        direction LR
+        L1["〔自写〕StatelessWidget"]:::ownSt
+        L2["〔自写〕StatefulWidget"]:::ownSf
+        L3["〔内置〕StatelessWidget"]:::fwSt
+        L4["〔内置〕StatefulWidget"]:::fwSf
+        L5["布局 / 渲染类<br/>RenderObjectWidget：无内部可变状态，但不是 StatelessWidget"]:::ro
+        L6["配置项 / 说明（非 Widget）"]:::cfg
+    end
+
+    classDef ownSt fill:#dbeafe,stroke:#1d4ed8,stroke-width:2px,color:#0f172a
+    classDef ownSf fill:#ffedd5,stroke:#c2410c,stroke-width:2px,color:#0f172a
+    classDef state fill:#fed7aa,stroke:#c2410c,stroke-width:2px,color:#0f172a
+    classDef fwSt fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#0f172a
+    classDef fwSf fill:#f3e8ff,stroke:#7e22ce,stroke-width:2px,color:#0f172a
+    classDef ro fill:#e5e7eb,stroke:#475569,stroke-width:2px,color:#0f172a
+    classDef cfg fill:#fef9c3,stroke:#a16207,stroke-width:1px,stroke-dasharray:6 4,color:#0f172a
+    classDef entry fill:#f8fafc,stroke:#64748b,stroke-width:2px,stroke-dasharray:6 4,color:#0f172a
