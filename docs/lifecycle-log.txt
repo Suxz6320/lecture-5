@@ -1,0 +1,90 @@
+
+===== flutter run -d chrome 启动 =====
+Flutter assets will be downloaded from https://storage.flutter-io.cn. Make sure you trust this source!
+Resolving dependencies...
+Downloading packages...
+  cupertino_icons 1.0.9 (2.0.0 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  test_api 0.7.12 (0.7.15 available)
+Got dependencies!
+3 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Launching lib\main.dart on Chrome in debug mode...
+Waiting for connection from debug service on Chrome...             23.4s
+
+Flutter run key commands.
+r Hot reload. 
+R Hot restart.
+h List all available interactive commands.
+d Detach (terminate "flutter run" but leave application running).
+c Clear the screen
+q Quit (terminate the application on the device).
+
+This app is linked to the debug service: ws://127.0.0.1:55910/8djhmpSdOCI=/ws
+Debug service listening on ws://127.0.0.1:55910/8djhmpSdOCI=/ws
+A Dart VM Service on Chrome is available at: http://127.0.0.1:55910/8djhmpSdOCI=
+The Flutter DevTools debugger and profiler on Chrome is available at: http://127.0.0.1:55910/8djhmpSdOCI=/devtools/?uri=ws://127.0.0.1:55910/8djhmpSdOCI=/ws
+Starting application from main method in: org-dartlang-app:///web_entrypoint.dart.
+[lifecycle] initState: 一次性初始化
+[lifecycle] didChangeDependencies: 依赖（如主题）就绪/变化
+[lifecycle] build: 重建界面 (counter=0, step=1)
+
+===== 按 r：热重载（State 应保持，不重新执行 initState） =====
+
+Performing hot reload...                                        
+[lifecycle] build: 重建界面 (counter=0, step=1)
+Performing hot reload...                                           512ms
+Reloaded application in 515ms.
+
+===== 按 R：热重启（State 重置，重新执行 initState） =====
+
+Performing hot restart...                                       
+Hot restarting application from main method in: org-dartlang-app:///web_entrypoint.dart (generation: 1).
+Performing hot restart...                                          388ms
+Restarted application in 389ms.
+[lifecycle] initState: 一次性初始化
+[lifecycle] didChangeDependencies: 依赖（如主题）就绪/变化
+[lifecycle] build: 重建界面 (counter=0, step=1)
+
+===== r/R 对照采集完毕，保持运行 =====
+Application finished.
+
+===== flutter run 退出 code=0 =====
+
+===== 第二次启动（截图用） =====
+Flutter assets will be downloaded from https://storage.flutter-io.cn. Make sure you trust this source!
+Resolving dependencies...
+Downloading packages...
+  cupertino_icons 1.0.9 (2.0.0 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  test_api 0.7.12 (0.7.15 available)
+Got dependencies!
+3 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Launching lib\main.dart on Chrome in debug mode...
+Waiting for connection from debug service on Chrome...             20.5s
+
+Flutter run key commands.
+r Hot reload. 
+R Hot restart.
+h List all available interactive commands.
+d Detach (terminate "flutter run" but leave application running).
+c Clear the screen
+q Quit (terminate the application on the device).
+
+This app is linked to the debug service: ws://127.0.0.1:49514/jBeerkxRs8I=/ws
+Debug service listening on ws://127.0.0.1:49514/jBeerkxRs8I=/ws
+A Dart VM Service on Chrome is available at: http://127.0.0.1:49514/jBeerkxRs8I=
+The Flutter DevTools debugger and profiler on Chrome is available at: http://127.0.0.1:49514/jBeerkxRs8I=/devtools/?uri=ws://127.0.0.1:49514/jBeerkxRs8I=/ws
+Starting application from main method in: org-dartlang-app:///web_entrypoint.dart.
+[lifecycle] initState: 一次性初始化
+[lifecycle] didChangeDependencies: 依赖（如主题）就绪/变化
+[lifecycle] build: 重建界面 (counter=0, step=1)
+Starting application from main method in: org-dartlang-app:///web_entrypoint.dart.
+[lifecycle] initState: 一次性初始化
+[lifecycle] didChangeDependencies: 依赖（如主题）就绪/变化
+[lifecycle] build: 重建界面 (counter=0, step=1)
+[lifecycle] build: 重建界面 (counter=1, step=1)
+[lifecycle] build: 重建界面 (counter=2, step=1)
+[lifecycle] build: 重建界面 (counter=2, step=5)
+[lifecycle] build: 重建界面 (counter=7, step=5)
